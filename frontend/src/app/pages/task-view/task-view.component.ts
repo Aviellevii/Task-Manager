@@ -23,4 +23,9 @@ export class TaskViewComponent implements OnInit {
       this.lists=lists;
       })
   }
+  onTaskClicked(task:any){
+    this.TaskSevice.Complete(task).subscribe(()=>{
+      task.Complete=!task.Complete;
+    })
+  }
 }

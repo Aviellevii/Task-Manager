@@ -17,4 +17,11 @@ export class TaskService {
   getTask(listId:string){
     return this.webRequest.get(`lists/${listId}/tasks`);
   }
+  NewTask(listId:string,title:string){
+    return this.webRequest.post(`lists/${listId}/tasks`,{title});
+  }
+  Complete(task:any){
+    return this.webRequest.patch(`lists/${task._listId}/tasks/${task._id}`,{Complete:!task.Complete});
+  }
+
 }
