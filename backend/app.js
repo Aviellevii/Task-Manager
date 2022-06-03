@@ -1,11 +1,16 @@
 const express = require('express')
 const app = express();
+const cors = require('cors')
+
 const bodyParser = require('body-parser')
 
 const mongoose = require('mongoose');
 const List = require('./model/list');
 const Task =require('./model/task');
 app.use(bodyParser.json());
+
+app.use(cors());
+
 mongoose.connect(`mongodb+srv://${process.env.MONG_USERNAME}:${process.env.MONGO_PASSWORD}@avielnodejs.qrpj6.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,{
     useNewUrlParser:true,
     useUnifiedTopology:true
