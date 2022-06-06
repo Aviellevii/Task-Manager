@@ -139,9 +139,9 @@ app.post('/user/login',(req,res)=>{
                     message:'Auth Success',
                     token,
                     user:{
-                      id: user._id,
-                      username: user.username
-                }
+                        id: user._id,
+                        username:user.username
+                    }
              })
             }
             res.status(401).json({
