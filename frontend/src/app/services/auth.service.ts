@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   authToken:any;
   user:any;
+  helper = new JwtHelperService();
 
   constructor(private http:HttpClient) { }
 
@@ -39,6 +41,7 @@ export class AuthService {
     localStorage.clear();
   }
   loggedIn(){
-    return localStorage.getItem('id_token');
+    const token = localStorage.getItem('id_token');
+    return !this.helper.isTokenExpired(token);
   }
 }

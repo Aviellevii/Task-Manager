@@ -21,9 +21,9 @@ export class WebRequestService {
     return this.http.post(`${this.Root_URL}/${uri}`,payload,{headers:this.headers});
   }
   patch(uri:string,payload:Object){
-    return this.http.patch(`${this.Root_URL}/${uri}`,payload,{headers:this.headers});
+    return this.http.patch(`${this.Root_URL}/${uri}`,payload,{headers:this.headers,responseType: 'text'});
   }
-  delete(uri:string,payload:Object){
+  delete(uri:string){
     return this.http.delete(`${this.Root_URL}/${uri}`,{headers:this.headers});
   }
 

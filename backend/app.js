@@ -45,7 +45,8 @@ app.patch('/lists/:id',checkAuth,(req,res)=>{
 })
 app.delete('/lists/:id',checkAuth,(req,res) => {
     List.findOneAndRemove({_id:req.params.id}).then((listRemoved)=>{
-        res.send(listRemoved)
+        res.send(listRemoved);
+        deleteTasksFromList(listRemoved._id);
     })
 })
 
@@ -150,6 +151,12 @@ app.post('/user/login',(req,res)=>{
         })
     })
 })
+
+let deleteTasksFromList = (_listId) =>{
+    Task.deleteMany({
+        _listId
+    })
+}
 app.listen(3000,() => {
     console.log('listening on port 3000');
 })

@@ -10,6 +10,8 @@ import { NewTaskComponent } from './pages/new-task/new-task.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterComponent } from './pages/register/register.component'
 import { FormsModule } from '@angular/forms';
+import { EditTaskComponent } from './pages/edit-task/edit-task.component';
+import { EditListComponent } from './pages/edit-list/edit-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,9 @@ import { FormsModule } from '@angular/forms';
     NewListComponent,
     NewTaskComponent,
     LoginPageComponent,
-    RegisterComponent
+    RegisterComponent,
+    EditTaskComponent,
+    EditListComponent
   ],
   imports: [
     BrowserModule,
