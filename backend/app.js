@@ -23,7 +23,7 @@ mongoose.connection.on('connected', () => {
 })
 
 app.get('/lists',checkAuth,(req,res) => {
-    List.find().then((lists)=>{
+    List.find({_userId:req.user._id}).then((lists)=>{
         res.send(lists)
     })
 })
@@ -32,7 +32,8 @@ app.post('/lists',checkAuth,(req,res) => {
     const {title} = req.body;
 
     let newList = new List({
-        title
+        title,
+        _userId:req.user._id
     })
     newList.save().then((list)=>{
         res.send(list)
@@ -41,10 +42,10 @@ app.post('/lists',checkAuth,(req,res) => {
 })
 
 app.patch('/lists/:id',checkAuth,(req,res)=>{
-    List.findOneAndUpdate({_id:req.params.id},{$set:req.body}).then(()=>res.sendStatus(200))
+    List.findOneAndUpdate({_userId:req.user._id,_id:req.params.id},{$set:req.body}).then(()=>res.sendStatus(200))
 })
 app.delete('/lists/:id',checkAuth,(req,res) => {
-    List.findOneAndRemove({_id:req.params.id}).then((listRemoved)=>{
+    List.findOneAndRemove({_userId:req.user._id,_id:req.params.id}).then((listRemoved)=>{
         res.send(listRemoved);
         deleteTasksFromList(listRemoved._id);
     })
@@ -53,12 +54,13 @@ app.delete('/lists/:id',checkAuth,(req,res) => {
 
 
 app.get('/lists/:id/tasks',checkAuth,(req,res) => {
-    Task.find({_listId:req.params.id}).then((tasks) => {
+    Task.find({_userId:req.user._id,_listId:req.params.id}).then((tasks) => {
         res.send(tasks)
     })
 })
 app.get('/lists/:id/tasks/:taskId',checkAuth,(req,res) => {
     Task.findOne({
+        _userId:req.user._id,
         _id:req.params.taskId,
         _listId:req.params.id
     }).then((task) => {
@@ -66,34 +68,68 @@ app.get('/lists/:id/tasks/:taskId',checkAuth,(req,res) => {
     })
 })
 app.post('/lists/:id/tasks',checkAuth,(req,res) => {
-    const {title} = req.body;
+    List.findOne({_userId:req.user._id,_listId:req.params.id}).then((user) =>{
+        if(user){
+            return true;
+        }
+        else false;
+    }).then((canCreate)=>{
+        if(canCreate){
+            const {title} = req.body;
     
-    let newTask = new Task({
-        title,
-        _listId:req.params.id
-    })
-    newTask.save().then((task) => {
-        res.send(task)
+            let newTask = new Task({
+                title,
+                _listId:req.params.id
+            })
+            newTask.save().then((task) => {
+                res.send(task)
+            })
+        }else{
+            res.sendStatus(404);
+        }
     })
 })
 
 app.patch('/lists/:id/tasks/:taskId',checkAuth,(req,res) => {
-    Task.findByIdAndUpdate({
-        _id:req.params.taskId,
-        _listId:req.params.id
-    },{
-        $set:req.body
-    }).then(()=>{
-        res.send({message:'Updated'});
+    List.findOne({_userId:req.user._id,_listId:req.params.id}).then((user) =>{
+        if(user){
+            return true;
+        }
+        else false;
+    }).then((canUpdate)=>{
+        if(canUpdate){
+            Task.findByIdAndUpdate({
+                _id:req.params.taskId,
+                _listId:req.params.id
+            },{
+                $set:req.body
+            }).then(()=>{
+                res.send({message:'Updated'});
+            })
+        }else{
+            res.sendStatus(404);
+        }
     })
 })
 
 app.delete('/lists/:id/tasks/:taskId',checkAuth,(req,res) => {
-    Task.findByIdAndRemove({
-        _id:req.params.taskId,
-        _listId:req.params.id
-    }).then((taskDelete) => {
-        res.send(taskDelete)
+    List.findOne({_userId:req.user._id,_listId:req.params.id}).then((user) =>{
+        if(user){
+            return true;
+        }
+        else false;
+    }).then((canRemove)=>{
+        if(canRemove){
+            Task.findByIdAndRemove({
+                _id:req.params.taskId,
+                _listId:req.params.id
+            }).then((taskDelete) => {
+                res.send(taskDelete)
+            })
+            
+        }else{
+            res.sendStatus(404);
+        }
     })
 })
 
