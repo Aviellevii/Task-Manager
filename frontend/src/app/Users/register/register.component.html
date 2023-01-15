@@ -1,0 +1,21 @@
+<div class="container">
+    <form action="" [formGroup]="registerForm" (ngSubmit)="register()">
+        <h1>Register Page</h1>
+        <label>Username</label>
+        <div class="input-box">
+            <span class="fas fa-user"></span>
+            <input type="text" placeholder="Please enter Username" formControlName="username">
+        </div>
+        <label>Password</label>
+        <div class="input-box">
+            <span class="fas fa-key"></span>
+            <input type="password" placeholder="Please enter Password" formControlName="password">
+        </div>
+        <div class="text">
+            <p>Have an account?  <a routerLink="/login">Log in</a></p>
+        </div>
+        <div class="buttons">
+            <button type="submit">Register</button>
+        </div>
+    </form>
+</div>
