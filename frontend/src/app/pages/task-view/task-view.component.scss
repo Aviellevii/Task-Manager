@@ -1,0 +1,69 @@
+.container{
+    margin: 1rem auto;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap:wrap;
+    min-height: 35rem;
+    max-width: 45rem;
+}
+.lists{
+    position: relative;
+    padding: 1rem;
+    flex: 1 1 15rem;
+    border: 1px solid black;
+}
+
+
+.all-lists{
+    p{
+        width: 70%;
+        padding: .5rem;
+        font-size: 1.2rem;
+        background-color: aqua;
+        cursor: pointer;
+    }
+    &.is-active{
+        background-color: black;
+        color: white;
+    }
+}
+
+.add-btn{
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+}
+.add-btn button{
+    font-size: 1rem;
+    border: none;
+    padding: .5rem;
+    outline: none;
+    cursor: pointer;
+    background-color: cadetblue;
+}
+
+.tasks{
+    position: relative;
+    border: 1px solid black;
+    flex: 2 1 25rem;
+    padding: 1rem;
+}
+.all-task p{
+    width: 90%;
+    padding: .5rem;
+    font-size: 1.2rem;
+    background-color: aqua;
+}
+.blol{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+}
+.blol button{
+    border-radius: 50%;
+    padding: 1rem;
+    font-size: 1.5rem;
+    background-color: aqua;
+    cursor: pointer;
+}

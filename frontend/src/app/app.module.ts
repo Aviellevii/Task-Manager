@@ -9,13 +9,17 @@ import { RegisterComponent } from './Users/register/register.component';
 import { TaskViewComponent } from './pages/task-view/task-view.component';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { InterceptorInterceptor } from './interceptor.interceptor';
+import { AddTaskComponent } from './pages/add-task/add-task.component';
+import { AddListComponent } from './pages/add-list/add-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    TaskViewComponent
+    TaskViewComponent,
+    AddTaskComponent,
+    AddListComponent
   ],
   imports: [
     BrowserModule,

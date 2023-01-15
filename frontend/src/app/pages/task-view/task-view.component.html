@@ -1,1 +1,33 @@
-<p>task-view works!</p>
+<div class="container">
+    <div class="lists">
+        <div class="header">
+            <h1>Lists</h1>
+        </div>
+            <div class="all-lists" *ngFor="let list of lists">
+                <p [routerLink]="['/lists',list.id]" routerLinkActive="is-active">
+                    {{list.title}}
+                </p>
+            </div>
+            <div class="add-btn">
+                <button routerLink="/add-list">
+                    +Add List
+                </button>
+            </div>
+    </div>
+    <div class="tasks">
+        <div class="header">
+            <h1>Task</h1>
+        </div>
+        <div class="all-task" *ngFor="let task of tasks">
+            <p>
+                {{task.title}}
+            </p>
+        </div>
+        <div class="blol">
+            <button  routerLink="./add-task">+</button>
+        </div>
+        <div *ngIf="!tasks">
+            <h3>Please Select List in Sidebar</h3>
+        </div>
+    </div>
+</div>
