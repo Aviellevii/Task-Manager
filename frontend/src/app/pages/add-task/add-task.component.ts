@@ -8,18 +8,36 @@ import { ListsService } from 'src/app/Services/lists.service';
   styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent {
+  taskId!:string;
   listId!:string;
+  taskname:string = '';
+  edit:boolean = false;
+  action:string = "Add";
   constructor(private listService:ListsService,private router:Router,private route:ActivatedRoute){
     this.route.params.subscribe((params)=>{
       if(params.listId){
         this.listId = params.listId;
       }
+      if(params.taskId){
+        this.taskId = params.taskId;
+        this.action = "Edit";
+        this.edit = true;
+        listService.getTask(this.listId,this.taskId).subscribe((task:any)=>{
+          this.taskname = task.title
+        })
+      }
     })
   }
 
   newTask(title:string){
-    this.listService.AddTask(this.listId,title).subscribe(()=>{
-      this.router.navigate(['../'],{relativeTo:this.route})
-    })
+    if(!this.edit){
+      this.listService.AddTask(this.listId,title).subscribe(()=>{
+        this.router.navigate(['../'],{relativeTo:this.route})
+      })
+    }else{
+      this.listService.UpdateTask(this.listId,this.taskId,title).subscribe(()=>{
+        this.router.navigate(['../../'],{relativeTo:this.route})
+      })
+    }
   }
 }

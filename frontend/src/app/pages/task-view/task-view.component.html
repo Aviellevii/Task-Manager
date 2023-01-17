@@ -1,27 +1,40 @@
 <div class="container">
-    <div class="lists">
-        <div class="header">
-            <h1>Lists</h1>
+    <button class="logout" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
+        <div class="lists">
+            <div class="header">
+                <h1>Lists</h1>
+            </div>
+                <div class="setting" *ngIf="listId"><i class="fas fa-cog"></i>
+                    <div class="menu-container">
+                        <a [routerLink]="['/edit-list',listId]">Edit</a>
+                        <a (click)="deleteList()">Delete</a>
+                    </div>
+                </div>       
+                <div class="all-lists" *ngFor="let list of lists">
+                    <a [routerLink]="['/lists',list.id]" routerLinkActive="active">
+                        {{list.title}}
+                    </a>
+                </div>
+                <div class="add-btn">
+                    <button routerLink="/add-list">
+                        +Add List
+                    </button>
+                </div>
         </div>
-            <div class="all-lists" *ngFor="let list of lists">
-                <p [routerLink]="['/lists',list.id]" routerLinkActive="is-active">
-                    {{list.title}}
-                </p>
-            </div>
-            <div class="add-btn">
-                <button routerLink="/add-list">
-                    +Add List
-                </button>
-            </div>
-    </div>
     <div class="tasks">
         <div class="header">
             <h1>Task</h1>
         </div>
-        <div class="all-task" *ngFor="let task of tasks">
+        <div class="all-task" *ngFor="let task of tasks" (click)="clicked(task)" [ngClass]="{'completed':task.completed}">
+           <div class="task">
             <p>
                 {{task.title}}
             </p>
+            <div class="btn-action">
+                <button class="delbtn"  (click)="deleteTask(task.id)"><i class="fas fa-trash"></i></button>
+                <button class="editbtn" [routerLink]="['./task',task.id]"><i class="fas fa-edit"></i></button>
+            </div> 
+           </div>
         </div>
         <div class="blol">
             <button  routerLink="./add-task">+</button>

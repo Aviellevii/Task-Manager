@@ -1,7 +1,7 @@
 <div class="container">
     <div class="body">
-        <label>Add List</label>
-        <input #title type="text" placeholder="please Enter list">
-        <button (click)="newList(title.value)">+Add List</button>
+        <label>{{action}} List</label>
+        <input #title type="text" placeholder="please Enter list" value="{{listname}}">
+        <button (click)="newList(title.value)">+ {{action}} List</button>
     </div>
 </div>

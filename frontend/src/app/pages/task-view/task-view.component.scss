@@ -5,25 +5,73 @@
     display: flex;
     flex-wrap:wrap;
     min-height: 35rem;
-    max-width: 45rem;
+    max-width: 60rem;
+}
+.logout{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    border: none;
+    padding: 1rem;
+    outline: none;
+    cursor: pointer;
+    background-color: whitesmoke;
+}
+.logout i{
+    font-size: 1.5rem;
+    color: red;
 }
 .lists{
+    background-color: whitesmoke;
     position: relative;
     padding: 1rem;
     flex: 1 1 15rem;
     border: 1px solid black;
 }
 
-
+.setting{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    top: 1.5rem;
+    right: 1.5rem;
+    cursor: pointer;
+    border: none;
+}
+.setting i{
+    padding: .5rem;
+    background-color: black;
+    font-size: 1rem;
+    color: white;
+}
+.menu-container{
+    display: none;
+}
+.setting:hover .menu-container{
+    display: flex;
+    flex-direction: column;
+}
+.setting:hover .menu-container a{
+    margin: .2rem 0;
+    text-decoration: none;
+    background-color: #000000;
+    color: white;
+    padding: .4rem;
+}
 .all-lists{
-    p{
+    a{
+        border: 1px solid black;
+        border-radius: 5px;
+        display: block;
+        margin: 1rem 0;
+        text-decoration: none;
+        color: #000000;
         width: 70%;
         padding: .5rem;
-        font-size: 1.2rem;
-        background-color: aqua;
+        font-size: 1.5rem;
         cursor: pointer;
     }
-    &.is-active{
+    .active{
         background-color: black;
         color: white;
     }
@@ -44,16 +92,60 @@
 }
 
 .tasks{
+    background-color: #b5b9c9;
     position: relative;
     border: 1px solid black;
     flex: 2 1 25rem;
-    padding: 1rem;
+    padding: .7rem;
 }
-.all-task p{
-    width: 90%;
+.tasks .task{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.task p{
+    font-size: 1.8rem;
+    margin-left:1rem;
+}
+.tasks .task:hover{
+    box-shadow: 2px 2px 9px 2px #000000;
+}
+.tasks .task .btn-action{
+    display: flex;
     padding: .5rem;
+    opacity: 0;
+}
+.tasks .task:hover .btn-action{
+    opacity: 1;
+}
+.completed{
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+.tasks .task .btn-action .delbtn{
+    padding: .5rem;
+    margin-right: .3rem;
+    color: white;
+    background-color: red;
+    border: none;
+    cursor: pointer;
+}
+.tasks .task .btn-action .editbtn{
+    color: white;
+    background-color: rgb(226, 14, 191);
+    border: none;
+    cursor: pointer;
+}
+.all-task .task{
+    width: 90%;
+    background-color: whitesmoke;
+    padding: .1rem .2rem;
+    margin: .8rem 0;
+
+}
+.all-task .task p{
     font-size: 1.2rem;
-    background-color: aqua;
 }
 .blol{
     position: absolute;
@@ -64,6 +156,8 @@
     border-radius: 50%;
     padding: 1rem;
     font-size: 1.5rem;
-    background-color: aqua;
+    background-color: #000000;
+    color: whitesmoke;
+    border: none;
     cursor: pointer;
 }

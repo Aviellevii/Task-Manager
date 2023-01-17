@@ -14,7 +14,9 @@ const routes: Routes = [
   {path:'list',component:TaskViewComponent,canActivate:[AuthGuard]},
   {path: 'lists/:listId', component: TaskViewComponent,canActivate:[AuthGuard]},
   {path: 'add-list', component: AddListComponent,canActivate:[AuthGuard]},
+  {path: 'edit-list/:listId', component: AddListComponent,canActivate:[AuthGuard]},
   {path: 'lists/:listId/add-task', component: AddTaskComponent,canActivate:[AuthGuard]},
+  {path: 'lists/:listId/task/:taskId', component: AddTaskComponent,canActivate:[AuthGuard]},
 ];
 
 @NgModule({

@@ -75,9 +75,10 @@ router.post('/:listId/task',asyncHandler(
         if(list){
             const {title} = req.body;
             const task:task ={
-                id:'',
+                id: '',
                 title,
-                _listId:list.id
+                _listId: list.id,
+                completed: false
             }
            
             const taskdb = await TaskModel.create(task);
