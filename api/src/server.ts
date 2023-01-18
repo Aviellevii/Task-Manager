@@ -20,7 +20,7 @@ app.use(cors());
 app.use('/api/list',ListRouter);
 app.use('/api/user',UserRouter);
 
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.listen(port,()=>{
     console.log(`listen on ${port}`);
 })
