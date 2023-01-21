@@ -1,0 +1,12 @@
+{
+    "name": "task-manager",
+    "version": "1.0.0",
+    "engines": {
+        "node": ">=18 <19"
+    },
+    "scripts": {
+        "start": "cd api/built && node server.js",
+        "prebuild": "cd api && npm run build",
+        "build": "cd frontend && npm run build"
+    }
+}

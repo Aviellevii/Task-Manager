@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AlertifyService } from 'src/app/Services/alertify.service';
 import { IUser } from 'src/model/IUser';
 import { user } from 'src/model/user.class';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class UserService {
   public userObservable:Observable<user>;
 
   constructor(private http:HttpClient,private alertify:AlertifyService){
-    this.api = "http://localhost:3000/api/user";
+    this.api = environment.production? '' : "http://localhost:3000";
     this.userObservable = this.userSubject.asObservable();
   }
 
@@ -22,7 +23,7 @@ export class UserService {
   }
 
   login(userLogin:IUser):Observable<user>{
-    return this.http.post<user>(`${this.api}/login`,userLogin).pipe(
+    return this.http.post<user>(`${this.api}/api/user/login`,userLogin).pipe(
       tap({
         next:(User)=>{
           this.setUserToLocalstorage(User);
@@ -35,7 +36,7 @@ export class UserService {
     )
   }
   register(userRegister:IUser):Observable<user>{
-    return this.http.post<user>(`${this.api}/register`,userRegister).pipe(
+    return this.http.post<user>(`${this.api}/api/user/register`,userRegister).pipe(
       tap({
         next:(User)=>{
           this.setUserToLocalstorage(User);
